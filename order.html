@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h2>My Orders</h2>
+    <div id="orders"></div>
+    <script>
+        const orders = JSON.parse(localStorage.getItem("orders")) || [];
+        const ordersDiv = document.getElementById("orders");
+        if (orders.length === 0) {
+            ordersDiv.innerHTML = "<p>No orders found.</p>";
+        } else {
+            orders.forEach((order, index) => {
+                const orderEl = document.createElement("div");
+                orderEl.className = "order";
+                orderEl.innerHTML = `<strong>Order #${index + 1}</strong><br>Product: ${order.name}<br>Quantity: ${order.quantity}<br>Total: $${order.price * order.quantity}`;
+                ordersDiv.appendChild(orderEl);
+            });
+        }
+    </script>
+</body>
+</html>
